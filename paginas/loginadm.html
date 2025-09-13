@@ -101,7 +101,7 @@ a {
         const response = await fetch("http://localhost:3333/login", { 
           method: "POST",
           headers: { "Content-Type": "application/json; charset=utf-8" },
-          body: JSON.stringify({ nome, senha, })
+          body: JSON.stringify({ nome, senha,})
         });
 
         const data = await response.json();
