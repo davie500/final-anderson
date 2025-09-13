@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Histórico de Perguntas</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f6f6f6; margin: 0; color: #222; }
+    .container { max-width: 600px; margin: 40px auto; background: #fff; border-radius: 12px; padding: 28px; box-shadow: 0 2px 8px #0001; }
+    h1 { margin-top: 0; }
+    .btnPergunta { display: block; width: 100%; background: #b36cff; color: #fff; border: none; border-radius: 8px; padding: 12px; font-weight: 700; margin-bottom: 12px; cursor: pointer; text-align: left;}
+    .btnHome { background: #222; color: #fff; margin-bottom: 18px; border-radius: 8px; padding: 10px 18px; border: none; font-weight: 700; cursor: pointer;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="btnHome" id="btnHome">Home</button>
+    <h1>Histórico de Perguntas</h1>
+    <div id="listaPerguntas"></div>
+  </div>
+  <script>
+    async function carregarPerguntas() {
+      try {
+        const resp = await fetch('http://localhost:3333/perguntas');
+        if (!resp.ok) throw new Error('Erro ao buscar perguntas');
+        const data = await resp.json();
+
+        const lista = document.getElementById('listaPerguntas');
+        lista.innerHTML = '';
+
+        data.perguntas.forEach((p, idx) => {
+          const btn = document.createElement('button');
+          btn.className = 'btnPergunta';
+          btn.textContent = p.texto || `Pergunta ${idx + 1}`;
+          btn.onclick = () => {
+            // Redireciona para a página de responder, passando o id da pergunta
+            location.href = `responder-pergunta.html?id=${p.id || idx}`;
+          };
+          lista.appendChild(btn);
+        });
+      } catch (err) {
+        alert('Erro ao carregar perguntas!');
+      }
+    }
+
+    carregarPerguntas();
+
+    document.getElementById('btnHome').onclick = () => location.href = 'homeadm.html';
+  </script>
+</body>
+</html>

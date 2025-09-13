@@ -1,0 +1,298 @@
+type: collection.insomnia.rest/5.0
+name: projeto-final
+meta:
+  id: wrk_c7b60e6cf9c24b10836158b1e846deb5
+  created: 1754518848700
+  modified: 1754518848700
+collection:
+  - url: http://localhost:3333/user/
+    name: /user/{id}
+    meta:
+      id: req_40b957f54a2245b5b114c51228516302
+      created: 1756764275343
+      modified: 1757367853180
+      isPrivate: false
+      sortKey: -1756764275343
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/user
+    name: /user
+    meta:
+      id: req_f9ff951529e749c0b17b5e4808c1d50d
+      created: 1756764394349
+      modified: 1757367844017
+      isPrivate: false
+      sortKey: -1752532174870
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/user
+    name: /user
+    meta:
+      id: req_54fa0a984f784df7975bccb6478dc7ef
+      created: 1756764400682
+      modified: 1757546301410
+      isPrivate: false
+      sortKey: -1756764400682
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"nome":"admin",
+        	"senha":"12345Davi"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/login
+    name: /login
+    meta:
+      id: req_bec946d819d843e898beb4e62b4aa8da
+      created: 1756937319199
+      modified: 1757544805571
+      isPrivate: false
+      sortKey: -1756937319199
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email":"davizao2@gmail.com",
+        	"password":"12345Davi"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/pesquisa
+    name: /posts
+    meta:
+      id: req_88317d4daf494aa59aa549bb57d74f60
+      created: 1757114223696
+      modified: 1757550221489
+      isPrivate: false
+      sortKey: -1757114223696
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "Projeto final de TI"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.2
+    authentication:
+      type: bearer
+      token: "{% response 'body', 'req_bec946d819d843e898beb4e62b4aa8da',
+        'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/user/2
+    name: /user
+    meta:
+      id: req_2e991987604a48feb742f7c16a9b18af
+      created: 1757367809510
+      modified: 1757367836495
+      isPrivate: false
+      sortKey: -1757367809510
+    method: DELETE
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/user/3
+    name: /user
+    meta:
+      id: req_b270bd6162bb4e3b9b674f15577a14fc
+      created: 1757367856789
+      modified: 1757368223134
+      isPrivate: false
+      sortKey: -1757367856789
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name":"admin1",
+        	"email":"admin@gmail.com",
+        	"password":"admin123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/perguntas
+    name: /perguntas
+    meta:
+      id: req_65e808a7d991439bb8eecfd1ac42005d
+      created: 1757547935581
+      modified: 1757548294700
+      isPrivate: false
+      sortKey: -1757547935581
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"nome":"teste para pergunta",
+        	"descricao":"teste desta pergunta ao banco",
+        	"numero_quest":"5"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/perguntas
+    name: /perguntas
+    meta:
+      id: req_0f9a9acc004d4d288b4c8a62bbf5b069
+      created: 1757548305943
+      modified: 1757548316053
+      isPrivate: false
+      sortKey: -1757548305943
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/pesquisa/3
+    name: /pesquisa/{id}
+    meta:
+      id: req_8a8980b99d6049ed863254c35d8b1390
+      created: 1757549559852
+      modified: 1757550283702
+      isPrivate: false
+      sortKey: -1757549559852
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"perguntas":1
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: http://localhost:3333/pesquisa/3/perguntas
+    name: /pesquisa/{id}/perguntas
+    meta:
+      id: req_89f762161e7b47e29a6e5dd1cdd10e74
+      created: 1757551597456
+      modified: 1757551749381
+      isPrivate: false
+      sortKey: -1757551597456
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.0.2
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_95ab596f506b3cd566ec4fdcea1d4faa133f28cd
+    created: 1754518848707
+    modified: 1754518848707
+environments:
+  name: Base Environment
+  meta:
+    id: env_95ab596f506b3cd566ec4fdcea1d4faa133f28cd
+    created: 1754518848704
+    modified: 1757114085731
+    isPrivate: false

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Home do Cliente</title>
+  <style>
+    :root {
+      --bg: #f6f6f6;
+      --panel: #ffffff;
+      --soft: #eeeeee;
+      --ink: #222;
+      --muted: #666;
+      --accent: #b36cff;
+      --dark: #2b2b2b;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    .container {
+      max-width: 400px;
+      margin: 60px auto;
+      background: var(--panel);
+      border-radius: 14px;
+      padding: 32px 28px;
+      box-shadow: 0 2px 8px #0001;
+    }
+    h1, h2 {
+      margin-top: 0;
+      font-size: 22px;
+      color: var(--accent);
+    }
+    button, .btn {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 16px;
+      width: 100%;
+      transition: background 0.2s;
+      display: block;
+    }
+    button:hover, .btn:hover {
+      background: #ad90ff;
+    }
+    .center {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container center">
+    <h1>Bem-vindo, Cliente!</h1>
+    <button id="btnResponder">Responder Perguntas</button>
+    <button id="btnHistorico">Histórico de Perguntas</button>
+  </div>
+  <script>
+    document.getElementById('btnResponder').onclick = () => location.href = 'responder-pergunta.html';
+    document.getElementById('btnHistorico').onclick = () => location.href = 'historico-perguntas.html';
+  </script>
+</body>

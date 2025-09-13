@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Configurar perguntas</title>
+<style>
+  :root{--bg:#f6f6f6;--panel:#ffffff;--soft:#eeeeee;--ink:#222;--muted:#666;--accent:#b36cff;--dark:#2b2b2b}
+  *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+  .wrap{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+  /* sidebar */
+  .side{background:#f1f1f1;border-right:1px solid #e5e5e5;display:flex;flex-direction:column;align-items:center;padding:18px 10px;position:relative}
+  .side .accent{position:absolute;left:8px;top:60px;bottom:60px;width:10px;background:linear-gradient(180deg,#eecbff 0%,#b36cff 50%,#ad90ff 100%);border-radius:10px}
+  .home{margin-top:6px;background:#222;color:#fff;border:none;border-radius:10px;padding:6px 12px;font-weight:700}
+  /* main */
+  main{padding:32px;max-width:720px}
+  h2{font-size:16px;margin:0 0 6px}
+  .box{background:var(--panel);border:1px solid #ececec;border-radius:14px;padding:18px;margin-bottom:18px}
+  .muted{color:var(--muted);font-size:13px;margin:0 0 12px}
+  label{display:block;margin:8px 0}
+  .row{display:flex;align-items:center;gap:10px}
+  input[type="number"]{width:70px;padding:6px;border-radius:8px;border:1px solid #ddd;background:#fff}
+  .plus{width:28px;height:28px;border-radius:6px;border:1px solid #ccc;background:#f4f4f4;cursor:pointer}
+  a.btn{display:inline-block;margin-top:12px;background:#d9d9d9;border-radius:8px;padding:8px 10px;text-decoration:none;color:#222}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside class="side">
+    <div class="accent"></div>
+    <button class="home" id="btnHome">Home</button>
+  </aside>
+
+  <main>
+    <div class="box">
+      <h2>Tipos de pergunta</h2>
+      <p class="muted">Escolha como o usuário responde</p>
+      <label><input type="radio" name="tipo" value="unica" checked> pergunta de resposta única</label>
+      <label><input type="radio" name="tipo" value="multipla"> perguntas de marcar (múltipla escolha)</label>
+      <label><input type="radio" name="tipo" value="aberta"> resposta aberta (texto)</label>
+    </div>
+
+    <div class="box">
+      <h2>Número de perguntas</h2>
+      <div class="row">
+        <input id="qtd" type="number" min="1" value="0" />
+        <button class="plus" onclick="document.getElementById('qtd').stepUp()">+</button>
+          <button class="btn" id="btnCriarPergunta" style="margin-left:8px;">Criar pergunta</button>
+      </div>
+    </div>
+
+    <div class="box">
+      <h2>Resultado das perguntas</h2>
+   
+    </div>
+  </main>
+</div>
+<script>
+  document.getElementById('btnHome').onclick = function() {
+    location.href = 'homeadm.html';
+  }
+
+  document.getElementById('btnCriarPergunta').onclick = function() {
+    // Pega o modelo selecionado
+    const tipo = document.querySelector('input[name="tipo"]:checked').value;
+    // Pega a quantidade de perguntas
+    const qtd = document.getElementById('qtd').value;
+    // Redireciona para a página de criação, passando os dados via query string
+    location.href = `criar-pergunta.html?tipo=${tipo}&qtd=${qtd}`;
+  }
+</script>
+</body>
+</html>

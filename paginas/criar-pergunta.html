@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Criar Perguntas</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f6f6f6; margin: 0; color: #222; }
+    .container { max-width: 600px; margin: 40px auto; background: #fff; border-radius: 12px; padding: 28px; box-shadow: 0 2px 8px #0001; }
+    h1 { margin-top: 0; }
+    .pergunta { margin-bottom: 18px; }
+    label { font-weight: 600; display: block; margin-bottom: 6px; }
+    input[type="text"], textarea { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc; margin-bottom: 8px; }
+    .opcoes { margin-bottom: 8px; }
+    .btn { background: #b36cff; color: #fff; border: none; border-radius: 8px; padding: 10px 18px; font-weight: 700; cursor: pointer; }
+    .btnHome { background: #222; margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button class="btn btnHome" id="btnHome">Home</button>
+    <button class="btn btnHome" id="btnSair" style="margin-left:8px;">Sair</button>
+    <h1>Criar Perguntas</h1>
+    <form id="formPerguntas">
+      <!-- Perguntas serão geradas aqui -->
+    </form>
+    <button class="btn" id="btnSalvar">Salvar perguntas</button>
+  </div>
+  <script>
+    // Função para pegar parâmetros da URL
+    function getParams() {
+      const params = {};
+      location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(s, k, v) {
+        params[k] = decodeURIComponent(v);
+      });
+      return params;
+    }
+
+    const params = getParams();
+    const tipo = params.tipo || 'unica';
+    const qtd = parseInt(params.qtd) || 1;
+
+    const form = document.getElementById('formPerguntas');
+
+    for (let i = 1; i <= qtd; i++) {
+      const div = document.createElement('div');
+      div.className = 'pergunta';
+
+      div.innerHTML = `<label>Pergunta ${i}:</label>
+        <input type="text" name="pergunta${i}" placeholder="Digite o texto da pergunta" required />`;
+
+      if (tipo === 'unica') {
+        div.innerHTML += `
+          <div class="opcoes">
+            <label>Opção 1:</label>
+            <input type="text" name="opcao${i}_1" required />
+            <label>Opção 2:</label>
+            <input type="text" name="opcao${i}_2" required />
+          </div>
+        `;
+      } else if (tipo === 'multipla') {
+        div.innerHTML += `
+          <div class="opcoes">
+            <label>Opção 1:</label>
+            <input type="text" name="opcao${i}_1" required />
+            <label>Opção 2:</label>
+            <input type="text" name="opcao${i}_2" required />
+            <label>Opção 3:</label>
+            <input type="text" name="opcao${i}_3" required />
+          </div>
+        `;
+      } else if (tipo === 'aberta') {
+        div.innerHTML += `<textarea name="resposta${i}" placeholder="Resposta aberta" disabled></textarea>`;
+      }
+
+      form.appendChild(div);
+    }
+
+    document.getElementById('btnHome').onclick = () => location.href = 'homeadm.html';
+    document.getElementById('btnSair').onclick = () => location.href = 'configuracao.html';
+
+    document.getElementById('btnSalvar').onclick = async function(e) {
+      e.preventDefault();
+
+      // Monta o array de perguntas
+      const perguntas = [];
+      for (let i = 1; i <= qtd; i++) {
+        const texto = form.querySelector(`[name="pergunta${i}"]`).value;
+        let opcoes = [];
+        let resposta = "";
+
+        if (tipo === 'unica' || tipo === 'multipla') {
+          let numOpcoes = tipo === 'unica' ? 2 : 3;
+          for (let j = 1; j <= numOpcoes; j++) {
+            opcoes.push(form.querySelector(`[name="opcao${i}_${j}"]`).value);
+          }
+        } else if (tipo === 'aberta') {
+          resposta = ""; // Resposta aberta será preenchida pelo usuário depois
+        }
+
+        perguntas.push({
+          texto,
+          tipo,
+          opcoes,
+          resposta
+        });
+      }
+
+      // Envia para o backend
+      try {
+        const resp = await fetch('http://localhost:3333/perguntas', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json; charset=utf-8' },
+          body: JSON.stringify({ perguntas })
+        });
+
+        if (resp.ok) {
+          alert('Perguntas salvas com sucesso!');
+          // Redirecionar ou limpar formulário se quiser
+        } else {
+          alert('Erro ao salvar perguntas!');
+        }
+      } catch (err) {
+        alert('Erro de conexão com o servidor!');
+      }
+    };
+  </script>
+</body>
+</html>
