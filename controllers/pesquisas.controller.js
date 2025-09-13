@@ -1,21 +1,21 @@
 import { connection } from "../db.js"
-import { createPerguntaIntoPesquisaSchema, createPostSchema } from "../schemas/posts.schemas.js"
+import { createPerguntaIntoPesquisaSchema, createPesquisaSchema,  } from "../schemas/pesquisa.schemas.js"
 
-export const createPostController=async(req,res)=>{
+export const createPesquisaController=async(req,res)=>{
     const bodyValues = Object.values(req.body)
-    if(bodyValues.length < createPostSchema.length){
-        return res.status(403).json({message:`Dados inválidos: os dados necessários são: ${createPostSchema}`})
+    if(bodyValues.length < createPesquisaSchema.length){
+        return res.status(403).json({message:`Dados inválidos: os dados necessários são: ${createPesquisaSchema}`})
     }
     const text = 'INSERT INTO pesquisa(nome) values($1) RETURNING *'
-    const resPost = await connection.query(text,bodyValues)
-    const createPost = resPost.rows[0]
+    const resPesquisa = await connection.query(text,bodyValues)
+    const createPesquisa = resPesquisa.rows[0]
    // const text2 = 'INSERT INTO post_usuarios(user_id,post_id) values($1, $2)'
     //const values = [req.user.id, createPost.id]
    // await connection.query(text2,values)
 
-    return res.status(201).json({...createPost})
+    return res.status(201).json({...createPesquisa})
 }
-export const getAllPostsController=async(req,res)=>{
+export const getAllPesquisasController=async(req,res)=>{
    
     try {
         const text = `
@@ -33,7 +33,7 @@ export const getAllPostsController=async(req,res)=>{
         return res.status(500).json({ error: 'Erro interno no servidor' });
     }
 }
-export const getPostByUserIdController=async(req,res)=>{
+export const getPesquisaByUserIdController=async(req,res)=>{
     const userId = parseInt(req.params.id)
     const text = `SELECT 
             c.id , u.user_id , c."content" , c."name" 

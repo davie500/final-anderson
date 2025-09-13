@@ -1,5 +1,5 @@
-export const createPostSchema = [
-    "name"
+export const createPesquisaSchema = [
+    "nome"
 ]
 export const createPerguntaIntoPesquisaSchema=[
     "perguntas"
